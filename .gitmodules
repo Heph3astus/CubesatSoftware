@@ -1,0 +1,3 @@
+[submodule "MemoryMappedObject"]
+	path = MemoryMappedObject
+	url = https://gist.github.com/1a873318d022060e5d10079fad2d831a.git
