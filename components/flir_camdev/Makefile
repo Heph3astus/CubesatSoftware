@@ -3,6 +3,8 @@ LINK +=
 
 CXXFLAGS += -Wall -c
 
+LDFLAGS += $(INCLUDE)
+
 bin/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDE) $< -o $@
 
