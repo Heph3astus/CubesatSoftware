@@ -1,0 +1,4 @@
+/home/kiernanolson/CubesatSoftware/components/flir_camdev/src/flir_camdev.cpp:4:10: fatal error: MemoryMappedObject.h: No such file or directory
+ #include "MemoryMappedObject.h"
+          ^~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
