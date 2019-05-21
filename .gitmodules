@@ -4,3 +4,6 @@
 [submodule "components/flir_camdev/lib/LeptonModule"]
 	path = components/flir_camdev/lib/LeptonModule
 	url = https://github.com/groupgets/LeptonModule.git
+[submodule "lib/tclap"]
+	path = lib/tclap
+	url = https://github.com/eile/tclap.git
