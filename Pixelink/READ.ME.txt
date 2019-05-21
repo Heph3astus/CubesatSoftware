@@ -1,0 +1,192 @@
+     PixeLINK SDK - Version 2.2
+     ==========================
+
+0. Table of Contents
+-----------------
+  1. Manifest
+  2. Installation Information
+  3. Programmatic Description
+  4. Further limitations / restrictions
+  5. Change Histroy
+  6. Known Issues
+
+1. Manifest
+-----------
+  The file INSTALL.INSTRUCTIONS.txt describes the set of files comprising
+  the PixeLINK API, as well as suggested locations of where the files
+  should be placed.  
+
+  This version of the API includes the following sample programs:
+     autoExposure - Program that shows, in general, how to work with camera 
+        features that support 'auto adjustment'.  More specifically, this
+        program will interact with the cameras exposure control.
+     autoWhiteBalance - Performs an auto white balance for the cameras, while
+        providing 'guidance' to the algorithm, on where to find a white area
+        in the image.
+     callback - A simple application demonstrating how to setup/use callbacks.
+     captureOEMLite - A GUI based application that controls many different camera
+        features.  It is built using Glade and GTK+3.
+     captureOEM - A more complete GUI based application that controls many different 
+        camera features.  It is built using Glade and GTK+3.
+     commitSettingsAsDefault - Simple program to cause a camera to commit its
+        current settings to non-voaltile memory, so that these settings will be used
+        with each power cycle of the camera.
+     fastMotionVideo - Captures a (H264) compressed video clip; normal to fast
+        motion.  Also, will can simultanously capture periodic uncompressed 
+        still images.
+     getCameraFeature - Demonstrates how to get some information about a camera 
+        feature. 
+     getCameraInfo - Demonstration of a trivial interaction with the PixeLINK 
+        API.  It simply displays information on attached cameras.
+     getHDRSnapshot - Will capture High Dynamic Range snapshots for a camera that
+        supports this feature.
+     getMultipleSnapshots - Collects multiple BMP snapshots from a camera.
+     getNextFrame - Simple program to find and stream a camera, using a robust
+        frame grab algorithms, if collects images from the camera and saves 
+        them to files.
+     getPolarShapshot - Creates a snapshot of each of the indiviual polar channels
+        on a polar camera.
+     getSnapshot - A 'C' sample code to capture a images from a PixeLINK camera
+        and save the encoded images to a variety of file types.
+     gpio - Demonstrates the use of a General Purpose Input, and a General 
+        Purpose Output.
+     lowUsbMemory - Shows how to accommodate systems with sub-optimal amount
+        of  memory allocated for USB buffering.
+     measureCallbackRate - Sample code to show how to create a simple callback.  
+        This program simply calculates the frame rate of the camera (via 
+        callbacks).
+     measureGetNextFrameRate - Sample code to show a very simple frame grab.  
+        The sample application 'getNextFrame' for a more robust frame grab 
+        example.  This program simply calculates the frame rate of the camera 
+        (via frame grabs).
+     multiCameraPreview - Shows all connected PixeLINK cameras, and allows
+        you to independently preview each of the cameras.
+     openCVSnapshot - Demonstrates how to use a Pixelink camera with openCV.
+        Specifically, uses openCV to create a snapshot if an image catured from
+        a Pixelink camera.
+     preview - Finds a camera, and starts the stream with preview.
+     saveSettings - Demonstrates how to save camera settings to non-volatile
+        storage, as well as ow to restore the camera settings back to factory
+        default values.
+     setPreviewSettings - Previews the camera, and demonstrates how to make 
+        adjustments to the preview window, as well as some camera settings
+        that affect the camera's preview.
+     simpleGUI - Uses Glade and GTK+3 to create a simple GUI based camera
+        application.
+     slowMotionVideo - Captures a (H264) compressed video; normal to slow
+        motion.  Note that slow motion videos require the camera to operate
+        with very high frame rates.
+     softwareTriggerWithCallback - A demonstration of a special software 
+        triggering mode.  See 'trigger' sample program for the more typical
+        use of software triggering.
+     recoverCamera - demonstrates how to put the camera into a known state.
+        This is especially useful if your application crashes without having
+        done its cleanup operations (such as PxLUnitialize).
+     triggering - A simple example of the use of the two triggering types: 
+        software & hardware.
+     whiteBalance - Demonstrates how you can control the white balance on a (color)
+        camera.  Furthermore, it also can instruct the camera to perform
+        manual color adjustments, as well as automatic white balance.
+
+  Furthermore, this API includes the following utility program:
+     captureOEM - A GUI (Gnome) based application that allows you to control
+         a number of the camera features.  The source code is also provided in
+         samples/captureOEM.
+     PxLVisionAccess - This is a command line utility that allows a user
+         to 'peek' and 'poke' at specific registers within the camera, allow
+         you to query and/or set, specific camera features.  This utility
+         should only be used with consultation with PixeLINK.
+
+2. Installation Information
+---------------------------
+  See the file INSTALL.INSTRUCTIONS.txt
+
+3. Programmers View of the PixeLINK API
+----------------------------------------
+  This 'package' is a Linux variant of the PixeLINK API offered on the 
+  Windows environment.  The complete documentation set for the PixeLINK API can
+  be found at www.pixelink.com.
+
+  This Linux variant of the PixeLINK supports the complete set of API services 
+  (functions) that can be found on the Windows variant, EXCEPT the following
+  functions:
+    PxLCreateDescriptor/PxLUpdateDescriptor/PxLRemoveDescriptor
+      Currently, only USB3 cameras are supported on Linux, and the USB3 cameras
+      do not support creating/modifying 'descriptors'.  Note however, it DOES
+      support the use the structure FRAME_DESC returned with each frame grab.
+  
+4. Further Limitations / Restrictions
+-------------------------------------
+  - The camera should be connected to the USB3 port, using a (good quality) 
+    USB3 cable.  The camera/API works (at a reduced capacity) when connected 
+    to a USB2 port, but has not been extensively tested.
+  
+5. Change Histroy
+-----------------
+  5.1. Changes from Version 2.3 to Version 2.4
+     - Added support for Pixelink Polar and cameras that support high dynamic
+       range (HDR).
+     - Added support for Ubunutu 18.04 (on Intel x86 'PCs').
+  5.2. Changes from Version 2.2 to Version 2.3
+     - Added new application, captureOEM
+     - Added support for new Auto features, AutoRoi, AutoGain, and AutoExposure 
+       limits.
+     - Added support for 10-bit packed pixel formats.
+  5.3. Changes from Version 2.1 to Version 2.2
+     - Added support for Ubuntu 16.04
+     - Folded in v2.1 patch containing JPEGDLL32v1.1.  This patch eliminates 
+       namespace collisions with some libraries, such as OpenCV
+     - Added FEATURE_FOCUS control to captureOEMLite
+
+  5.4. Changes from Version 2.0 to Version 2.1
+     - Added support for (H264) video capture.  Specifically, added the
+       methods:
+         . PxLGetEncodedClip
+         . PxLFormatClipEx
+     - Added support for General Purpose Input (GPI), whereby the hardware 
+       trigger resource can be re-mapped to serve as  GPI
+     - Added support for 64-bit ARM installs (ARMv8 -- aarch64)
+
+  5.5. Changes from Version 1.0 to Version 2.0
+     - Improvements in image quality of the preview window; hardware acceleration
+       is now used utilized if the platform supports it.
+     - Support for USB3 cameras with binary files that are USB3 Vision (U3V) 
+       certified, as well as cameras that contain binaries that are pre-U3V
+       certified.
+     - FEATURE_FOCUS can now accept 2 parameters when PxLSetFeature is called
+       with the FEATURE_FLAG_ONEPUSH bit of the flags parameter is set (to
+       perfrom a one-time auto focus operation).  These two additional
+       parameters (if supplied) will represent the range over which the auto
+       focus it to be applied.
+     - Added support for CAMERA_INITIALIZE_EX_FLAG_ISSUE_STREAM_STOP with 
+       PxLInitializeEx to assist with recover from unexpected termination of 
+       camera applications.
+     - Cleanup operations are now performed on signals SIGINT and SIGTERM.
+     - Support for cameras equipped with a General Purpose Input.
+
+6. Known Issues
+---------------
+  6.1. Running applications camera applications built using our API, may show
+     'libGL error: file not found' messages when the application first starts 
+     on Odroid platforms.  The API uses the SDL2 library for image preview.  
+     However, that library uses the OpenGL form any of its 'advanced' 
+     graphics operations.  However, Odroid platforms do not support the 
+     complete OpenGL library, only the more limited OpenGL-ES variant.  The 
+     PixeLINK API does not make use of these more advanced operations, so as 
+     such, it will never attempt to call functions within these missing 
+     (sub)libraries.
+ 
+     If you choose, you can configure your Odroid system to not use the 
+     'armsoc' video driver in favor of the more 'generic' X11 video driver.  
+     This can be done, for instance, by renaming the file 
+     'etc/X11/xorg.conf' to something else.  The SDL2 library will detect the 
+     more generic driver when your application starts, and in turn, will not 
+     attempt to load the libraries with the more advanced graphics.  Thus, you 
+     should no longer get the error messages when your application starts up.  
+     However, other applications you run on your system may be adversely 
+     affected when your system is configure in this way, as your system can no
+     longer take advantage of the ARM optimized handling done by the armsoc
+     video driver.
+
+
+
