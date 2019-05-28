@@ -1,7 +1,7 @@
 //
 // main.c
 //
-// Sample code to capture an image from a PixeLINK camera and save 
+// Sample code to capture an image from a PixeLINK camera and save
 // the encoded image to a file.
 //
 
@@ -9,13 +9,13 @@
 #include <PixeLINKApi.h>
 #include "getsnapshot.h"
 
-int 
-main(int argc, char* argv[])
+int
+visSnapshot(const char* fileName)
 {
 	HANDLE hCamera;
-	const char* pFilenameJpg = "snapshot.jpg";
-	const char* pFilenameBmp = "snapshot.bmp";
-	const char* pFilenameTiff = "snapshot.tiff";
+	const char* pFilenameJpg = strCat(fileName, ".jpg");
+	const char* pFilenameBmp = strCat(fileName,".bmp");
+	const char* pFilenameTiff = strCat(filename, ".tiff");
 	const char* pFilenamePsd = "snapshot.psd";
 	const char* pFilenameRgb24 = "snapshot.rgb24.bin";
 	const char* pFilenameRgb24Nondib = "snapshot.rgb24nondib.bin";
