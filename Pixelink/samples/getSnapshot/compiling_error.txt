@@ -1,0 +1,4 @@
+/home/kiernanolson/CubesatSoftware/Pixelink/samples/getSnapshot/getsnapshot.c:6:10: fatal error: ../include/PixeLINKApi.h: No such file or directory
+ #include <../include/PixeLINKApi.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.

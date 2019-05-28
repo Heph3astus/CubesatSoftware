@@ -1,10 +1,10 @@
 //
-// Sample code to capture an image from a PixeLINK camera and save 
+// Sample code to capture an image from a PixeLINK camera and save
 // the encoded image to a file.
 //
 
-#include <PixeLINKApi.h>
-#include "getsnapshot.h"
+#include <../include/PixeLINKApi.h>
+#include "etsnapshot.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +13,7 @@
 //
 // Get a snapshot from the camera, and save to a file.
 //
-int 
+int
 GetSnapshot(HANDLE hCamera, U32 imageFormat, const char* pFilename)
 {
 	U32 rawImageSize;
@@ -26,7 +26,7 @@ GetSnapshot(HANDLE hCamera, U32 imageFormat, const char* pFilename)
 	assert(0 != hCamera);
 	assert(pFilename);
 
-	// Determine the size of buffer we'll need to hold an 
+	// Determine the size of buffer we'll need to hold an
 	// image from the camera
 	rawImageSize = DetermineRawImageSize(hCamera);
 	if (0 == rawImageSize) {
@@ -60,8 +60,8 @@ GetSnapshot(HANDLE hCamera, U32 imageFormat, const char* pFilename)
 
 //
 // Capture an image from the camera.
-// 
-// NOTE: PxLGetNextFrame is a blocking call. 
+//
+// NOTE: PxLGetNextFrame is a blocking call.
 // i.e. PxLGetNextFrame won't return until an image is captured.
 // So, if you're using hardware triggering, it won't return until the camera is triggered.
 //
@@ -91,11 +91,11 @@ GetRawImage(HANDLE hCamera, char* pRawImage, U32 rawImageSize, FRAME_DESC* pFram
 }
 
 //
-// NOTE: PxLGetNextFrame can return ApiCameraTimeoutError on occasion. 
-// How you handle this depends on your situation and how you use your camera. 
+// NOTE: PxLGetNextFrame can return ApiCameraTimeoutError on occasion.
+// How you handle this depends on your situation and how you use your camera.
 // For this sample app, we'll just retry a few times.
 //
-PXL_RETURN_CODE 
+PXL_RETURN_CODE
 GetNextFrame(HANDLE hCamera, U32 bufferSize, void* pFrame, FRAME_DESC* pFrameDesc)
 {
 	int numTries = 0;
@@ -120,7 +120,7 @@ GetNextFrame(HANDLE hCamera, U32 bufferSize, void* pFrame, FRAME_DESC* pFrameDes
 //
 // Returns 0 on failure
 //
-U32 
+U32
 DetermineRawImageSize(HANDLE hCamera)
 {
 	float parms[4];		// reused for each feature query
@@ -141,7 +141,7 @@ DetermineRawImageSize(HANDLE hCamera)
 	roiWidth	= (U32)parms[FEATURE_ROI_PARAM_WIDTH];
 	roiHeight	= (U32)parms[FEATURE_ROI_PARAM_HEIGHT];
 
-	// Query pixel addressing 
+	// Query pixel addressing
         // assume no pixel addressing (in case it is not supported)
 	parms[FEATURE_PIXEL_ADDRESSING_PARAM_VALUE] = 1.0;
 	numParams = 2; // pixel addressing value, pixel addressing type (e.g. bin, average, ...)
@@ -167,13 +167,13 @@ DetermineRawImageSize(HANDLE hCamera)
 //
 // Returns 0 on failure.
 //
-U32 
+U32
 GetPixelSize(U32 pixelFormat)
 {
 	U32 retVal = 0;
 
 	switch(pixelFormat) {
-	
+
 		case PIXEL_FORMAT_MONO8:
 		case PIXEL_FORMAT_BAYER8_GRBG:
 		case PIXEL_FORMAT_BAYER8_RGGB:
@@ -211,20 +211,20 @@ GetPixelSize(U32 pixelFormat)
 }
 
 //
-// Given a buffer with a raw image, create and return a 
-// pointer to a new buffer with the encoded image. 
+// Given a buffer with a raw image, create and return a
+// pointer to a new buffer with the encoded image.
 //
-// NOTE: The caller becomes the owner of the buffer containing the 
-//		 encoded image, and therefore must free the 
+// NOTE: The caller becomes the owner of the buffer containing the
+//		 encoded image, and therefore must free the
 //		 buffer when done with it.
 //
 // Returns SUCCESS or FAILURE
 //
 int
 EncodeRawImage(const char* pRawImage,
-			   const FRAME_DESC* pFrameDesc, 
-			   U32 encodedImageFormat, 
-			   char** ppEncodedImage, 
+			   const FRAME_DESC* pFrameDesc,
+			   U32 encodedImageFormat,
+			   char** ppEncodedImage,
 			   U32* pEncodedImageSize)
 {
 	U32 encodedImageSize = 0;
@@ -283,7 +283,6 @@ SaveImageToFile(const char* pFilename, const char* pImage, U32 imageSize)
 	numBytesWritten = fwrite((void*)pImage, sizeof(char), imageSize, pFile);
 
 	fclose(pFile);
-	
+
 	return ((U32)numBytesWritten == imageSize) ? SUCCESS : FAILURE;
 }
-
